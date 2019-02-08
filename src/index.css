@@ -1,14 +1,86 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import '~antd/dist/antd.css';
+
+html {
+    min-height: 100%;
+    width: auto;
+    font-size: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+
+#app {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+#root {
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   margin-left: auto;
+   margin-right: auto;
+   height: 100%;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    background: #222;
+    padding-left: 24px;
+    padding-right: 24px;
+    display: block;
+    z-index: 999;
+}
+
+.content {
+  width: 750px;
+  height: auto;
+  padding: 15px;
+  margin:0 auto;
+}
+
+.account_form {
+  width: 350px;
+  padding: 5px;
+  margin:0 auto;
+  -webkit-align-content: center;
+  align-content: center;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
+    border-bottom: 2px solid transparent;
+    color: #1890ff;
+}
+
+.main_nav {
+  width: 100%;
+  border-bottom: 2px solid;
+  border-bottom-color: lightgray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.nav_item {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+.nav_item:hover{
+  color: #1890ff !important;
+}
+
+.nav_item:focus{
+  color: #1890ff !important;
+}
+
+.form_submit_btn {
+  margin:0 auto;
+  -webkit-align-content: center;
+  align-content: center;
+}
+
+.form_link {
+  padding-top: 30px;
 }
