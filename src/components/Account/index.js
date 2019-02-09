@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerInfo from '../UserInfo';
+import UserInfo from '../UserInfo';
 
 import { AuthUserContext, withAuthorization } from '../Session';
 
@@ -10,7 +10,7 @@ const Account = () => (
     {authUser => (
       <div>
         <h1>Account Info:</h1>
-        <PlayerInfo user={authUser.uid} />
+        <UserInfo user={authUser.uid} />
         <PasswordChangeLink />
       </div>
     )}

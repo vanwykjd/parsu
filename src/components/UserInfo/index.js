@@ -4,7 +4,7 @@ import { List } from 'antd'
 import { withFirebase } from '../Firebase';
 import { HandicapChangeLink } from '../EditHcp';
 
-class PlayerInfo extends Component {
+class UserInfo extends Component {
   constructor(props) {
     super(props);
 
@@ -54,4 +54,4 @@ class PlayerInfo extends Component {
   }
 }
 
-export default withFirebase(PlayerInfo);
+export default withFirebase(UserInfo);

@@ -20,8 +20,10 @@ html {
    flex-grow: 1;
    margin-left: auto;
    margin-right: auto;
+   width: 100%;
    height: 100%;
 }
+
 
 .header {
     position: fixed;
@@ -34,19 +36,15 @@ html {
     z-index: 999;
 }
 
-.content {
-  width: 750px;
+.content_container {
+  width: 100%;
   height: auto;
-  padding: 15px;
-  margin:0 auto;
 }
 
-.account_form {
-  width: 350px;
-  padding: 5px;
+.content {
+  max-width: 750px;
   margin:0 auto;
-  -webkit-align-content: center;
-  align-content: center;
+  padding: 15px;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
@@ -55,11 +53,15 @@ html {
 }
 
 .main_nav {
-  width: 100%;
+  width: auto;
   border-bottom: 2px solid;
   border-bottom-color: lightgray;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.nav_item_wrapper {
+  text-align: center;
 }
 
 .nav_item {
@@ -73,6 +75,14 @@ html {
 
 .nav_item:focus{
   color: #1890ff !important;
+}
+
+.account_form {
+  max-width: 350px;
+  padding: 5px;
+  margin:0 auto;
+  -webkit-align-content: center;
+  align-content: center;
 }
 
 .form_submit_btn {

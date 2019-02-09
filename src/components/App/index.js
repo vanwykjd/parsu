@@ -15,7 +15,7 @@ import { withAuthentication } from '../Session';
 
 const App = () => (
     <Router>
-      <div>
+      <div className='content_container'>
         <Nav />
         <div className='content'>
         <Route path={ROUTES.ABOUT} component={AboutPage} />  
@@ -25,7 +25,6 @@ const App = () => (
         <Route path={ROUTES.PW_RESET} component={PwChangePage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
         <Route path={ROUTES.REGISTER} component={RegisterPage} />
-      
         </div>
       </div>
     </Router>

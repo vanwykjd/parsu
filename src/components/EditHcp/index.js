@@ -9,6 +9,8 @@ import { AuthUserContext, withAuthorization } from '../Session';
 import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 
+import { InputNumber, Button } from 'antd';
+
 const HandicapChangePage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
@@ -49,8 +51,8 @@ class HandicapChangeFormBase extends Component {
     e.preventDefault();
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(value) {
+    this.setState({ handicap: value });
   }
 
   render() {
@@ -63,16 +65,16 @@ class HandicapChangeFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <InputNumber
           name="handicap"
           value={handicap}
           onChange={this.onChange}
-          type="number"
+          min={-5}
           placeholder={currentHandicap}
         />
-        <button disabled={isInvalid} type="submit">
-          Update Handicap
-        </button>
+        <Button disabled={isInvalid} htmlType="submit">
+          Update
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>

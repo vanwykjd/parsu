@@ -20,15 +20,15 @@ const Nav = () => (
 const NavAuth = () => (
     <Row type="flex" justify="center" align="middle" className='main_nav'>
   
-      <Col span={3}>
+      <Col span={3} className='nav_item_wrapper'>
         <Link to={ROUTES.ABOUT} className='nav_item'>About Parsuit</Link>
       </Col>
       
-       <Col span={3}>
+       <Col span={3} className='nav_item_wrapper'>
         <Link to={ROUTES.ACCOUNT} className='nav_item'>Account</Link>
        </Col>
   
-      <Col span={3}>
+      <Col span={3} className='nav_item_wrapper'>
          <SignOutButton />
        </Col>
   
@@ -39,11 +39,11 @@ const NavAuth = () => (
 const NavNonAuth = () => (
   <Row type="flex" justify="center" align="middle" className='main_nav'>
   
-      <Col span={3}>
+      <Col span={9} className='nav_item_wrapper'>
         <Link to={ROUTES.ABOUT} className='nav_item'>About Parsuit</Link>
       </Col>
 
-       <Col span={3}>
+       <Col span={9} className='nav_item_wrapper'>
          <Button>
            <Link to={ROUTES.SIGN_IN} className='nav_item'>Sign In / Sign Up</Link>
          </Button>
