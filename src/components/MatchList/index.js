@@ -18,7 +18,7 @@ const MatchListPage = () => (
      <CreateMatchLink />
         <h1>Your Matches</h1>
         
-        <MatchList user={authUser.uid} />
+        <MatchList user={authUser} />
       </div>
     )}
   </AuthUserContext.Consumer>
@@ -37,7 +37,7 @@ class MatchListBase extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    this.props.firebase.db.ref(`users/${this.props.user}/matches`).on('value', snapshot => {
+    this.props.firebase.db.ref(`users/${this.props.user.uid}/matches`).on('value', snapshot => {
      
       if ( snapshot.val() ) {
         const matchObject = snapshot.val();
@@ -62,7 +62,7 @@ class MatchListBase extends Component {
   }
   
   componentWillUnmount() {
-    this.props.firebase.db.ref(`users/${this.props.user}/matches`).off();
+    this.props.firebase.db.ref(`users/${this.props.user.uid}/matches`).off();
   }
   
 
@@ -72,11 +72,9 @@ class MatchListBase extends Component {
     return (
       <div>
         
-        { loading && <div>Loading matches...</div> }
-        
-        { isEmpty && <div>Looks like you need to create some matches...</div> }
+        { !loading && isEmpty && <div>Looks like you need to create some matches...</div> }
          
-        { matchList && 
+        { !loading && matchList && 
            <List size="large" bordered>
              { matchList.map( (match) =>
                <List.Item key={match.uid}>

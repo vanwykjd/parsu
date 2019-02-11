@@ -2,99 +2,91 @@ import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
 
-import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom'
+import { InputNumber, List } from 'antd';
 
-import { AuthUserContext, withAuthorization } from '../Session';
-import * as ROUTES from '../../constants/routes';
-import { Link } from 'react-router-dom';
 
-import { InputNumber, Button } from 'antd';
-
-const HandicapChangePage = () => (
-  <AuthUserContext.Consumer>
-    {authUser => (
-      <div className='account_form'>
-        <h1>Edit Handicap</h1>
-        <HandicapChangeForm user={authUser}/>
-      </div>
-    )}
-  </AuthUserContext.Consumer>
-);
-
-const INITIAL_STATE = {
-  handicap: '',
-  error: null
-};
-
-class HandicapChangeFormBase extends Component {
+class HandicapChangeForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = {
+      currentHandicap: null,
+      new_handicap: null,
+      error: null,
+      isEditing: false,
+    };
+    
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
+    this.onCancle = this.onCancle.bind(this);
+  }
+  
+  toggleEdit() {
+    (this.state.isEditing)
+      ? this.setState({ isEditing: false })
+      : this.setState({ isEditing: true })
   }
   
   onSubmit(e) {
-    const { handicap } = this.state;
+    const { new_handicap } = this.state;
     const user = this.props.user;
     this.props.firebase.user(user.uid)
-      .update({handicap: handicap})
+      .update({handicap: new_handicap})
       .then(() => {
-      this.setState({ ...INITIAL_STATE });
-      this.props.history.push(ROUTES.ACCOUNT);
+      this.setState({ isEditing: false });
+      window.location.reload();
       })
     .catch(error => {
         this.setState({ error });
       });
     e.preventDefault();
   }
+  
+  onCancle() {
+    const currentHandicap = (this.state.currentHandicap) ? this.state.currentHandicap : this.props.user.handicap;
+    
+    this.setState({ new_handicap: currentHandicap, isEditing: false })
+  } 
 
   onChange(value) {
-    this.setState({ handicap: value });
+    this.setState({ new_handicap: value });
   }
 
   render() {
-    const { handicap, error } = this.state;
-    const currentHandicap = this.props.user.handicap;
-    
-    const isInvalid =
-      handicap === '' ||
-      handicap === currentHandicap;
-
+    const { new_handicap, error, isEditing } = this.state;
+    const currentHandicap = (this.state.currentHandicap) ? this.state.currentHandicap : this.props.user.handicap;
     return (
-      <form onSubmit={this.onSubmit}>
-        <InputNumber
-          name="handicap"
-          value={handicap}
-          onChange={this.onChange}
-          min={-5}
-          placeholder={currentHandicap}
-        />
-        <Button disabled={isInvalid} htmlType="submit">
-          Update
-        </Button>
+      <span>
+        { isEditing
+          ? (
+         <List.Item actions={[<div className="link_style" onClick={this.onSubmit}>update</div>,<div className="link_style" onClick={this.onCancle}>cancle</div>]}>
+          <List.Item.Meta title="Handicap" 
+            description={
+              <InputNumber
+                name="handicap"
+                size="small"
+                value={new_handicap}
+                defaultValue={currentHandicap}
+                onChange={this.onChange}
+                min={-5}
+                placeholder={currentHandicap}
+              />
+            } />
+       
+            {error && <p>{error.message}</p>}
+    
 
-        {error && <p>{error.message}</p>}
-      </form>
+          </List.Item>
+          ) : (
+            <List.Item actions={[<div className="link_style" href='' onClick={this.toggleEdit}>edit</div>]}>
+            <List.Item.Meta title="Handicap" description={currentHandicap} />
+            </List.Item>
+          )
+        }
+      </span>
     );
   }
 }
 
-const HandicapChangeLink = () => (
-
-    <Link to={ROUTES.HCP_EDIT}>Edit</Link>
-
-);
-
-const HandicapChangeForm = compose(
-  withRouter,
-  withFirebase,
-)(HandicapChangeFormBase);
-
-export { HandicapChangeForm, HandicapChangeLink };
-
-const condition = authUser => !!authUser;
-
-export default withAuthorization(condition)(HandicapChangePage);
+export default withFirebase(HandicapChangeForm);

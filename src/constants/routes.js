@@ -1,4 +1,4 @@
-export const ABOUT = '/ ';
+export const ABOUT = '/';
 export const REGISTER = '/register';
 export const SIGN_IN = '/signin';
 export const ACCOUNT = '/account';

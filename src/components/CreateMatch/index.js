@@ -10,7 +10,7 @@ import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 import { Form, Row, Button } from 'antd';
 
-import SelectPlayerForm from '../SelectPlayerForm';
+import SelectPlayer from '../SelectPlayer';
 import SelectCourse from '../SearchCourse';
 import SelectFormat from '../SelectFormat';
 
@@ -201,7 +201,7 @@ class CreateMatchFormBase extends Component {
           <SelectFormat selectFormat={this.selectFormat} />
        
           
-          <SelectPlayerForm selectPlayers={this.selectPlayers}/>
+          <SelectPlayer selectPlayers={this.selectPlayers}/>
     
 
         <Row type="flex" justify="center" align="middle">

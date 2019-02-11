@@ -4,10 +4,10 @@ import {
   Form, Button, Icon
 } from 'antd';
 
-import SearchPlayer from '../SearchPlayer';
+import SearchPlayer from './SearchPlayer';
 import { withFirebase } from '../Firebase';
 
-class SelectPlayerForm extends Component {
+class SelectPlayer extends Component {
   constructor(props) {
     super(props);
     
@@ -138,4 +138,4 @@ class SelectPlayerForm extends Component {
   }
 }
 
-export default withFirebase(SelectPlayerForm);
+export default withFirebase(SelectPlayer);

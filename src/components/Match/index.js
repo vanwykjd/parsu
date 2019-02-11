@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 
 import { withFirebase } from '../Firebase';
 
+
 import { AuthUserContext, withAuthorization } from '../Session';
 
 
@@ -24,7 +25,6 @@ class MatchBase extends Component {
 
     this.state = {
       loading: false,
-      course: null,
       match: null
     };
   }
@@ -46,9 +46,10 @@ class MatchBase extends Component {
   
   render() {
     const { match } = this.state;
+
     return (
       <div>
-        <h1>Match ({this.props.match.params.id})</h1>
+        <h2>{this.props.match.params.id}</h2>
       </div>
     );
   }

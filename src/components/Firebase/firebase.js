@@ -34,6 +34,36 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
   // *** User API ***
 
+  // *** Merge Auth and DB User API *** //
+
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once('value')
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+            const userMatches = Object.keys(dbUser.matches).map(key => ({
+               ...dbUser.matches[key],
+              uid: key,
+            }));
+   
+            // merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              providerData: authUser.providerData,
+              matchList: userMatches,
+              ...dbUser,
+            };
+
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
+
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');

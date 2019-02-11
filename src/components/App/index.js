@@ -6,7 +6,6 @@ import AboutPage from '../About';
 import AccountPage from '../Account';
 import RegisterPage from '../Register';
 import SignInPage from '../SignIn';
-import HandicapChangePage from '../EditHcp';
 import PwForgetPage from '../PwForget';
 import PwChangePage from '../PwReset';
 import MatchListPage from '../MatchList';
@@ -20,12 +19,11 @@ const App = () => (
       <div className='content_container'>
         <Nav />
         <div className='content'>
-        <Route path={ROUTES.ABOUT} component={AboutPage} />  
+        <Route exact path={ROUTES.ABOUT} component={AboutPage} />  
         <Route path={ROUTES.REGISTER} component={RegisterPage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
   
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-        <Route path={ROUTES.HCP_EDIT} component={HandicapChangePage} />
         
         
         <Route path={ROUTES.PW_FORGET} component={PwForgetPage} />
