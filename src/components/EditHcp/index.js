@@ -83,9 +83,9 @@ class HandicapChangeFormBase extends Component {
 }
 
 const HandicapChangeLink = () => (
-  <div className='form_link'>
+
     <Link to={ROUTES.HCP_EDIT}>Edit</Link>
-  </div>
+
 );
 
 const HandicapChangeForm = compose(

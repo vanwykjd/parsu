@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { Form, Icon, Input, Button, Row } from 'antd';
+import { Form, Icon, Input, InputNumber, Button, Row } from 'antd';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 const RegisterPage = () => (
-  <div className='form'>
+  <div className='account_form'>
+  <Row type="flex" justify="center" align="middle">
     <h1>Create Account</h1>
+  </Row>
     <RegisterForm />
   </div>
 );
 
 const INITIAL_STATE = {
   username: '',
+  handicap: '',
   email: '',
   password: '',
   error: null,
@@ -29,16 +32,17 @@ class RegisterFormBase extends Component {
   }
   
   onSubmit = event => {
-    const { username, email, password } = this.state;
+    const { username, email, password, handicap } = this.state;
 
     this.props.firebase
-      .doCreateUserWithEmailAndPassword(username, email, password)
+      .doCreateUserWithEmailAndPassword(email, password)
       .then(authUser => {
           return this.props.firebase
             .user(authUser.user.uid)
             .set({
               username,
               email,
+              handicap,
           });
       })
       .then(() => {
@@ -56,9 +60,13 @@ class RegisterFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  changeHandicap = value => {
+    this.setState({ handicap: value })
+  };
+
   render() {
-    const { username, email, password, error } = this.state;
-    const isInvalid = username === '' || email === '' || password === '';
+    const { username, email, password, handicap, error } = this.state;
+    const isInvalid = username === '' || email === '' || password === '' || handicap === '';
     
     return (
       <Form onSubmit={this.onSubmit} className="registration-form">
@@ -77,6 +85,7 @@ class RegisterFormBase extends Component {
                  prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                  onChange={this.onChange}
                  type="text"
+                 autoComplete="new-email"
                  placeholder="Email" />
         </Form.Item>
       
@@ -86,13 +95,26 @@ class RegisterFormBase extends Component {
                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                  onChange={this.onChange}
                  type="password"
+                 autoComplete="new-password"
                  placeholder="Password" />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit" className="login-form-button" disabled={isInvalid}>
-            Create Account
-        </Button>
-        
+        <Form.Item>
+          <InputNumber
+            className='form_input_number'
+            name="handicap"
+            value={handicap}
+            onChange={this.changeHandicap}
+            min={-5}
+            placeholder='Handicap'
+          />
+        </Form.Item>
+      
+        <Row type="flex" justify="center" align="middle">
+          <Button type="primary" htmlType="submit" className="login-form-button" disabled={isInvalid}>
+              Create Account
+          </Button>
+        </Row>
         {error && <p>{error.message}</p>}
       </Form>
     );

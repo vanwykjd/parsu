@@ -9,7 +9,8 @@ import SignInPage from '../SignIn';
 import HandicapChangePage from '../EditHcp';
 import PwForgetPage from '../PwForget';
 import PwChangePage from '../PwReset';
-
+import MatchListPage from '../MatchList';
+import MatchPage from '../Match';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
@@ -19,12 +20,18 @@ const App = () => (
         <Nav />
         <div className='content'>
         <Route path={ROUTES.ABOUT} component={AboutPage} />  
-        <Route path={ROUTES.PW_FORGET} component={PwForgetPage} />
+        <Route path={ROUTES.REGISTER} component={RegisterPage} />
+        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+  
         <Route path={ROUTES.ACCOUNT} component={AccountPage} />
         <Route path={ROUTES.HCP_EDIT} component={HandicapChangePage} />
+        
+        
+        <Route path={ROUTES.PW_FORGET} component={PwForgetPage} />
         <Route path={ROUTES.PW_RESET} component={PwChangePage} />
-        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route path={ROUTES.REGISTER} component={RegisterPage} />
+        
+        <Route exact path={ROUTES.MATCHES} component={MatchListPage} />
+        <Route exact path={ROUTES.MATCH} component={MatchPage} />
         </div>
       </div>
     </Router>

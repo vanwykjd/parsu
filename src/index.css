@@ -52,21 +52,39 @@ html {
     color: #1890ff;
 }
 
-.main_nav {
-  width: auto;
+.main_nav_wrapper {
+  width: 100vw;
   border-bottom: 2px solid;
   border-bottom-color: lightgray;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  
+}
+
+.main_nav {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 375px;
+  height: 62px;
+  margin: 0 auto;
+  padding: 15px 20px;
 }
 
 .nav_item_wrapper {
+  width: 115px;
+  height: auto;
+  padding-top: 5px;
   text-align: center;
 }
 
 .nav_item {
-  color: black !important;
-  text-decoration: none !important;
+  color: black;
+  text-decoration: none;
+}
+
+.nav_item_btn {
+  width: 125px;
+  height: auto;
+  text-decoration: none;
+  text-align: center;
 }
 
 .nav_item:hover{
@@ -75,6 +93,12 @@ html {
 
 .nav_item:focus{
   color: #1890ff !important;
+  text-decoration: none;
+}
+
+.nav_item:active{
+  color: #1890ff !important;
+  text-decoration: none;
 }
 
 .account_form {
@@ -85,6 +109,7 @@ html {
   align-content: center;
 }
 
+
 .form_submit_btn {
   margin:0 auto;
   -webkit-align-content: center;
@@ -93,4 +118,135 @@ html {
 
 .form_link {
   padding-top: 30px;
+}
+
+.form_input_number {
+  width: 50%;
+}
+
+/* Dropdown Div */
+.dropdown_trigger {
+    color: #1890ff;
+    background-color: transparent;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    -webkit-transition: color .3s;
+    transition: color .3s;
+    -webkit-text-decoration-skip: objects;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    font-size: 14px;
+    font-variant: tabular-nums;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    line-height: 1.5;
+    color: rgba(0,0,0,0.65);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    z-index: 1;
+    display: block;
+}
+.dropdown:before {
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    right: 0;
+    bottom: -7px;
+    content: ' ';
+    opacity: .0001;
+    z-index: -9999;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    outline: none;
+    position: relative;
+    list-style-type: none;
+    padding: 4px 0;
+    margin: 0;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background-clip: padding-box;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.dropdown-item {
+    padding: 5px 12px;
+    margin: 0;
+    clear: both;
+    font-size: 14px;
+    font-weight: normal;
+    color: rgba(0,0,0,0.65);
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    line-height: 22px;
+}
+
+/* Links inside the dropdown */
+.dropdown-item {
+    color: rgba(0,0,0,0.65);
+    display: block;
+    padding: 5px 12px;
+    margin: -5px -12px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-item a:hover {
+  background-color:  #e6f7ff;
+  color: #1890ff;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown-content {
+  display: block;
+  color: white;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: white;
+}
+
+.dropdown_arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    width: 10px;
+}
+
+.sign_in_btn {
+    line-height: 1.499;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 32px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
 }

@@ -11,7 +11,9 @@ import * as ROUTES from '../../constants/routes';
 
 const SignInPage = () => (
   <div className='account_form'>
+  <Row type="flex" justify="center" align="middle">
     <h1>Sign In</h1>
+  </Row>
     <SignInForm />
     <PasswordForgetLink />
     <RegisterLink />
@@ -62,6 +64,7 @@ class SignInFormBase extends Component {
                  prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                  onChange={this.onChange}
                  type="text"
+                 autoComplete="new-email"
                  placeholder="Email" />
         </Form.Item>
       
@@ -71,6 +74,7 @@ class SignInFormBase extends Component {
                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                  onChange={this.onChange}
                  type="password"
+                 autoComplete="new-password"
                  placeholder="Password" />
         </Form.Item>
         <Row type="flex" justify="center" align="middle">
