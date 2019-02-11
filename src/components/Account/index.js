@@ -9,7 +9,7 @@ const Account = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <h1>Account Info:</h1>
+        <h1>Account Info</h1>
         <UserInfo user={authUser.uid} />
         <PasswordChangeLink />
       </div>

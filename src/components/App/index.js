@@ -11,6 +11,7 @@ import PwForgetPage from '../PwForget';
 import PwChangePage from '../PwReset';
 import MatchListPage from '../MatchList';
 import MatchPage from '../Match';
+import CreateMatchPage from '../CreateMatch';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
@@ -32,6 +33,7 @@ const App = () => (
         
         <Route exact path={ROUTES.MATCHES} component={MatchListPage} />
         <Route exact path={ROUTES.MATCH} component={MatchPage} />
+        <Route exact path={ROUTES.CREATE_MATCH} component={CreateMatchPage} />
         </div>
       </div>
     </Router>

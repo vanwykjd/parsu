@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
-
 import { compose } from 'recompose';
 import { withRouter, Link } from 'react-router-dom'
-
 
 import { List } from 'antd';
 import { withFirebase } from '../Firebase';
@@ -11,11 +9,15 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext, withAuthorization } from '../Session';
 
+import { CreateMatchLink } from '../CreateMatch';
+
 const MatchListPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <h1>Your Current Matches</h1>
+     <CreateMatchLink />
+        <h1>Your Matches</h1>
+        
         <MatchList user={authUser.uid} />
       </div>
     )}
@@ -69,6 +71,7 @@ class MatchListBase extends Component {
   
     return (
       <div>
+        
         { loading && <div>Loading matches...</div> }
         
         { isEmpty && <div>Looks like you need to create some matches...</div> }
@@ -77,10 +80,10 @@ class MatchListBase extends Component {
            <List size="large" bordered>
              { matchList.map( (match) =>
                <List.Item key={match.uid}>
-                 <List.Item.Meta title={match.uid} description={match.uid}  />
+                 <List.Item.Meta title={match.course} description={match.date}  />
                    <Link to={`${ROUTES.MATCHES}/${match.uid}`}>
                       Go To Match
-                    </Link>
+                   </Link>
                  </List.Item>
              )}
            </List>

@@ -7,3 +7,4 @@ export const PW_RESET = '/pw-reset';
 export const HCP_EDIT = '/hcp-edit';
 export const MATCHES = '/matches';
 export const MATCH = '/matches/:id';
+export const CREATE_MATCH = '/create-match';
