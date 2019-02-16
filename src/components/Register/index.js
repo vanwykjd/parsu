@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { Form, Icon, Input, InputNumber, Button, Row } from 'antd';
+import { Form, Icon, Input, InputNumber, Button, Row, Radio } from 'antd';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -19,6 +19,7 @@ const RegisterPage = () => (
 const INITIAL_STATE = {
   username: '',
   handicap: '',
+  gender: '',
   email: '',
   password: '',
   error: null,
@@ -32,7 +33,7 @@ class RegisterFormBase extends Component {
   }
   
   onSubmit = event => {
-    const { username, email, password, handicap } = this.state;
+    const { username, email, password, handicap, gender } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
@@ -43,6 +44,7 @@ class RegisterFormBase extends Component {
               username,
               email,
               handicap,
+              gender,
           });
       })
       .then(() => {
@@ -57,6 +59,7 @@ class RegisterFormBase extends Component {
   };
   
   onChange = event => {
+    console.log(event.target.name, event.target.value);
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -65,8 +68,8 @@ class RegisterFormBase extends Component {
   };
 
   render() {
-    const { username, email, password, handicap, error } = this.state;
-    const isInvalid = username === '' || email === '' || password === '' || handicap === '';
+    const { username, email, password, handicap, gender, error } = this.state;
+    const isInvalid = username === '' || email === '' || password === '' || handicap === '' || gender === '';
     
     return (
       <Form onSubmit={this.onSubmit} className="registration-form">
@@ -97,6 +100,13 @@ class RegisterFormBase extends Component {
                  type="password"
                  autoComplete="new-password"
                  placeholder="Password" />
+        </Form.Item>
+      
+        <Form.Item>
+          <Radio.Group name="gender" onChange={this.onChange} value={gender}>
+            <Radio value={'M'}>Male</Radio>
+            <Radio value={'F'}>Female</Radio>
+          </Radio.Group>
         </Form.Item>
 
         <Form.Item>

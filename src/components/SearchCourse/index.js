@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Form, Select, Spin } from 'antd';
-import { getCourses } from '../../courses';
+import { getCourseList, getCourse } from '../../courses';
 
 const Option = Select.Option;
 
@@ -24,8 +24,8 @@ class SelectCourse extends Component {
     if (this.state.courseList) {
       return;
     }
-    const courses = getCourses();
-    this.setState({ courseList: courses });
+    const courseList = getCourseList();
+    this.setState({ courseList: courseList });
   }
   
   
@@ -36,9 +36,9 @@ class SelectCourse extends Component {
 
      let data = [];
      for (var i = 0; i < courseList.length; i++) {
-       const nameSearched = courseList[i].name.toLowerCase();
+       const nameSearched = courseList[i].course_name.toLowerCase();
        if (nameSearched.match(value.toLowerCase())) {
-         data.push({key: i, value: courseList[i].name });
+         data.push({key: i, value: courseList[i].course_name });
        } 
      }
       
@@ -47,16 +47,17 @@ class SelectCourse extends Component {
   }
   
   selectCourse(course) {
-    const courseList = this.state.courseList;
-    this.props.selectCourse(courseList[course]);
-    this.setState({ course: course, data: [], fetching: false});
+    const courseSelected = this.state.courseList[course];
+    this.props.selectCourse(courseSelected);
+    this.setState({ course: courseSelected, data: [], fetching: false});
+    
   }
   
   
  render() {  
     const { data, fetching, course } = this.state;
     const courseList = this.state.courseList;
-    const selectedCourse = (course) ? courseList[course].name : undefined;
+    const selectedCourse = (course) ? course.course_name : undefined;
     
     return (
     <Form.Item

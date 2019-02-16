@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Form, Select } from 'antd';
+import { Form, Select, Tooltip } from 'antd';
 import { getFormats } from '../../formats';
 
 const Option = Select.Option;
@@ -39,7 +39,12 @@ class SelectFormat extends Component {
                 onChange={this.selectFormat}
               >
               {formatList.map((format) =>
-                <Option key={format.id} value={format.id}>{format.name}</Option>
+                <Option key={format.format_id} value={format.format_id}>
+                  <Tooltip title={format.description}>
+                    {format.format_name}
+                  </Tooltip>
+                </Option>
+    
               )}
               </Select>
           </Form.Item>

@@ -32,8 +32,8 @@ const CreateMatchPage = () => (
         <Row type="flex" justify="center" align="middle">
           <h1>Create Match</h1>
        
-        <CreateMatchForm />
-      </Row>
+          <CreateMatchForm />
+        </Row>
       </div>
     )}
   </AuthUserContext.Consumer>
@@ -58,7 +58,7 @@ class CreateMatchFormBase extends Component {
     
     const date = new Date();
     const dd = date.getDate();
-    const mm = date.getMonth() + 1; //January is 0!
+    const mm = date.getMonth() + 1; 
 
     const yyyy = date.getFullYear();
 
@@ -73,19 +73,19 @@ class CreateMatchFormBase extends Component {
   
   
   selectPlayers(players) {
-    console.log('Selected Players: ',players);
+    console.log('Selected Players: ', players);
     this.setState({ players });
   }
   
   
   selectCourse(course) {
-    console.log('Selected Course: ',course);
+    console.log('Selected Course: ', course );
     this.setState({course: course });
   }
   
   
   selectFormat(format) {
-    console.log('Selected Format: ',format);
+    console.log('Selected Format: ', format);
     this.setState({format: format });
   }
   
@@ -105,9 +105,8 @@ class CreateMatchFormBase extends Component {
     let roundsArr = [];
     let count = 0;
   
-    const course_id = this.state.course.id;
+    const course_id = this.state.course.course_id;
     const course = this.state.course;
-    const course_holes = course.holes;
     const format = this.state.format;
     const playerList = this.state.players;
     const match_id = this.state.match_id;
@@ -118,21 +117,17 @@ class CreateMatchFormBase extends Component {
     let pointObject = {};
     let playerPoints = {};
     
+    
+    
     playerList.map(player => 
       playerPoints[player.player_id] = 0  
     )
     
-    course_holes.map((hole) =>
-      scoreObject[hole] = playerPoints
-    );
-    
-    course_holes.map((hole) =>
-      roundObject[hole] = { net: 0, gross: 0 }
-    );
-    
-    course_holes.map((hole) =>
-      pointObject[hole] = 0
-    );
+    for ( let i = 0; i < course.num_of_holes; i++) {
+      scoreObject[i + 1] = playerPoints;
+      roundObject[i + 1] = { net: 0, gross: 0 };
+      pointObject[i + 1] = 0;
+    }
 
     for (count; count < playerList.length; count++) {
       let round = this.props.firebase.db.ref('rounds').push().key;
@@ -142,12 +137,12 @@ class CreateMatchFormBase extends Component {
     this.props.firebase.db.ref(`matches/${match_id}`).set({status: 0, format: format, course: course_id })
     .then(() => { 
       playerList.map( (player, index) =>
-        this.props.firebase.db.ref(`users/${player.player_id}/matches/${match_id}`).set({round_id: roundsArr[index], date: date, course: course.name})
+        this.props.firebase.db.ref(`users/${player.player_id}/matches/${match_id}`).set({round_id: roundsArr[index], date_created: date, course_name: course.course_name, course_id: course_id})
       )
     })
     .then(() => { 
       playerList.map( (player,index) =>
-       this.props.firebase.db.ref(`rounds/${roundsArr[index]}`).set({player_id: player.player_id, tees: 0, match_id: match_id, handicap: player.handicap, course_id: course_id, status: 0, scores: roundObject })
+       this.props.firebase.db.ref(`rounds/${roundsArr[index]}`).set({player_id: player.player_id, tees: 0, match_id: match_id, course_id: course_id, status: 0, scores: roundObject })
       )
     })
     .then(() => {
@@ -161,9 +156,9 @@ class CreateMatchFormBase extends Component {
       )
     })
     .then(() => { 
-      course_holes.map( (hole) =>
+      for ( let i = 0; i < course.num_of_holes; i++) {
        this.props.firebase.db.ref(`matches/${match_id}/scores/`).update(scoreObject)
-      )
+      }
     })
     .then(() => { 
       playerList.map( (player,index) =>
