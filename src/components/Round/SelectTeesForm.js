@@ -46,7 +46,7 @@ class SelectTeesForm extends Component {
         <Form.Item>
             <RadioGroup onChange={this.selectTees} value={tees}>
                 {tee_options.map((option) =>
-                    <Radio value={option}>{option.tee_name}</Radio>
+                    <Radio key={option.tee_name} value={option}>{option.tee_name}</Radio>
                 )}  
             </RadioGroup>
         </Form.Item>

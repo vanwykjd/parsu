@@ -52,6 +52,7 @@ class CreateMatchFormBase extends Component {
     this.selectFormat = this.selectFormat.bind(this);
   }
   
+  
   componentDidMount() {
     this.setState({ loading: true });
     const refKey = this.props.firebase.matches().push().key;
@@ -71,30 +72,25 @@ class CreateMatchFormBase extends Component {
     });
   }
   
-  
   selectPlayers(players) {
     console.log('Selected Players: ', players);
     this.setState({ players });
   }
-  
   
   selectCourse(course) {
     console.log('Selected Course: ', course );
     this.setState({course: course });
   }
   
-  
   selectFormat(format) {
     console.log('Selected Format: ', format);
     this.setState({format: format });
   }
   
-  
   setPlayerObjects(players) {
     console.log('Set Players', players);
     this.setState({})
   }
-  
   
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -182,32 +178,24 @@ class CreateMatchFormBase extends Component {
   render() {
     const { course, format, players, error } = this.state;
     const isInvalid =
-      this.state.format === '' ||
-      this.state.course  === '' ||
-      this.state.players  === '';
+      format === '' ||
+      course  === '' ||
+      players  === '';
     
     return (
-    
       <Form onSubmit={this.onSubmit}>
+        <SelectCourse selectCourse={this.selectCourse} course={course}/>
+        <SelectFormat selectFormat={this.selectFormat} />     
+        <SelectPlayer selectPlayers={this.selectPlayers}/>
     
-          <SelectCourse selectCourse={this.selectCourse} course={course}/>
-
-
-          <SelectFormat selectFormat={this.selectFormat} />
-       
-          
-          <SelectPlayer selectPlayers={this.selectPlayers}/>
-    
-
         <Row type="flex" justify="center" align="middle">
           <Button type="primary" htmlType="submit" className="login-form-button" disabled={isInvalid}>
-              Create Match
+            Create Match
           </Button>
         </Row>
       
         {error && <p>{error.message}</p>}
       </Form>
-     
     );
   }
 }

@@ -2,8 +2,6 @@ import React from 'react';
 
 import { AuthUserContext, withAuthorization } from '../Session';
 
-import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes';
 import { CreateMatchLink } from '../CreateMatch';
 import MatchList from './MatchList';
 

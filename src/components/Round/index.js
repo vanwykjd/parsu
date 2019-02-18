@@ -5,6 +5,7 @@ import { withFirebase } from '../Firebase';
 import { getCourse, getCourseHandicap } from '../../courses';
 import SelectTeesForm from './SelectTeesForm';
 import RoundScores from './RoundScores';
+import {Handicap, Par} from '../ScoreCard/holes';
 
 class Round extends Component {
   constructor(props) {
@@ -91,37 +92,63 @@ class Round extends Component {
                                      
   render() {
     const { round, course, strokes } = this.state;
+    let total;
+    if (round) {
+      const hole_ids = Object.keys(round.scores);
+      const gross_scores = hole_ids.map((hole) => parseInt(round.scores[hole].gross));
+      total = gross_scores.reduce((a, b) => a + b, 0);
+    }
+    
     
     return (
-      <Row type="flex" justify="space-around" align="middle">
-        { round && (round.tees === 0) && 
-           <SelectTeesForm course={course} user={this.props.user} selectTees={this.selectTees} />
+      <div>
+        {course && 
+         <span>
+         <Handicap holes={course.holes} tees={round.tees} />
+         <Par holes={course.holes} tees={round.tees}/>
+        </span>
         }
-          
+        <br/>
+      
+        <Row type="flex" justify="space-around" align="middle">
+          { round && (round.tees === 0) && 
+            <SelectTeesForm
+              course={course}
+              user={this.props.user}
+              selectTees={this.selectTees}
+            />
+          }
+        </Row>
+  
         { round && (round.tees !== 0) && 
-          <Row type="flex" justify="space-around" align="middle">
-          <Col span={4}>
-            {this.props.user.username}
-          </Col>
-         
-             
-          { Object.keys(round.scores).map( (hole_id) => 
-            <Col span={1}>
-             <RoundScores
-                score={round.scores[hole_id]}
-                hole_id={hole_id}
-                match_id={round.match_id}
-                strokes={strokes[hole_id]}
-                player_id={this.props.user.uid}
-                round_id={this.props.round_id}/>
-            </Col>
-                                     
-            )}
-          
-          </Row>
+          <section>
+            <h1>Gross Score</h1>
+            <Row type="flex" justify="space-around" align="middle">
+              <Col span={4} className="score_cell_title">
+                {this.props.user.username}
+              </Col>
+
+              { Object.keys(round.scores).map( (hole_id) =>
+                <Col span={1} key={hole_id}>                          
+                  <RoundScores
+                    score={round.scores[hole_id]}
+                    hole_id={hole_id}
+                    hole_par={course.holes[hole_id].par}
+                    match_id={round.match_id}
+                    strokes={strokes[hole_id]}
+                    player_id={this.props.user.uid}
+                    round_id={this.props.round_id}
+                  />
+                </Col>
+              )}        
+
+              <Col span={2} className="score_cell">
+                {total}
+              </Col>
+            </Row>
+          </section>
         }
-       
-      </Row>
+      </div>
     );
   }
 }

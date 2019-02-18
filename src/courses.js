@@ -7,6 +7,8 @@ const courses = {
     "postal_code": "29928",
     "country": "United States of America",
     "num_of_holes": 18,
+    "course_tees": ["Love", "Blue", "White", "Gold", "Green", "Orange"],
+    "tee_colors": ["Gray", "Blue", "White", "Yellow", "Green", "Orange"],
     "tee_options": {
         "M": [
           {
@@ -431,6 +433,8 @@ const courses = {
     "postal_code": "29928",
     "country": "United States of America",
     "num_of_holes": 18,
+    "course_tees": ["Dye", "Blue", "White", "Gold", "Green"],
+    "tee_colors": ["Gray", "Blue", "White", "Yellow", "Green"],
     "tee_options": {
       "M": [
         {

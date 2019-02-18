@@ -1,3 +1,5 @@
+<Distances holes={this.props.course.holes} tees={this.props.course.course_tees} tee_colors={this.props.course.tee_colors} />
+
 const courses = [
   {
     name: "Old South Golf Links",

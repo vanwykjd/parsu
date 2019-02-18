@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Form, Select, Spin } from 'antd';
-import { getCourseList, getCourse } from '../../courses';
+import { getCourseList } from '../../courses';
 
 const Option = Select.Option;
 
@@ -28,9 +28,7 @@ class SelectCourse extends Component {
     this.setState({ courseList: courseList });
   }
   
-  
   searchCourses(value) {
-
      this.setState({ data: [], fetching: true });
      const courseList = this.state.courseList;
 
@@ -43,20 +41,17 @@ class SelectCourse extends Component {
      }
       
      this.setState({ data, fetching: false });
-     
   }
   
   selectCourse(course) {
     const courseSelected = this.state.courseList[course];
     this.props.selectCourse(courseSelected);
     this.setState({ course: courseSelected, data: [], fetching: false});
-    
   }
   
   
- render() {  
+  render() {
     const { data, fetching, course } = this.state;
-    const courseList = this.state.courseList;
     const selectedCourse = (course) ? course.course_name : undefined;
     
     return (

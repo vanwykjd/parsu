@@ -1,46 +1,29 @@
 import React, { Component } from 'react';
-import { Row, Col, List } from 'antd';
+import { Row, Col } from 'antd';
 
 
 class PlayerPoints extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state ={
-      total: null,
-      loading: false,
-    };
-    
-    this.setPlayerPoints = this.setPlayerPoints.bind(this);
-  }
-  
-  setPlayerPoints() {
-    this.setState({ loading: true });
-    const points = this.props.points;
-    const total = points.reduce((a, b) => a + b, 0);
-    this.setState({ points, total, loading: false});
-  }
-  
-  componentDidMount() {
-    console.log('Setting Player Points');
-    this.setPlayerPoints();
-  }
-  
                                      
   render() {
-    const { loading, total } = this.state;
     const points = this.props.points;
+    const total = points.reduce((a, b) => a + b, 0);
     return (
-     <section>
+      <section>
         { points && 
-          <Row>
-          <Col span={4}>
-            {this.props.player}
-          </Col>
-          { points.map( (point) =>
-            <Col span={1}>{point}</Col>
-          )}
-          <Col span={2}>{total}</Col>
+          <Row type="flex" justify="space-around" align="middle" >
+            <Col span={4} className="score_cell_title">
+              {this.props.player}
+            </Col>
+      
+            { points.map( (point, index) =>
+              <Col span={1} className="score_cell" key={this.props.player+'_'+index+'_point'}> 
+                {point}
+              </Col>
+            )}
+      
+            <Col span={2} className="score_cell">
+              {total}
+            </Col>
           </Row>
         }
       </section>

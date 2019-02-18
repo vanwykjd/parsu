@@ -38,13 +38,19 @@ html {
    width: 100%;
 }
 
+
+.match_content {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .content_container {
   width: 100%;
   height: auto;
 }
 
 .content {
-  max-width: 750px;
+  max-width: 875px;
   margin:0 auto;
   padding: 15px;
 }
@@ -159,3 +165,35 @@ html {
     background-color: #fff;
 }
 
+.round_input .ant-select-selection  {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.round_input .ant-select-selection .ant-select-selection-selected-value {
+  float: inherit;
+}
+
+.score_cell {
+ text-align: center;
+ border: 1px solid black;
+ height: 32px;
+ padding-top: 4px;
+}
+
+.score_cell_title {
+ text-align: right;
+ border: 1px solid black;
+ font-weight: 700;
+ height: 32px;
+ padding: 4px;
+
+}
+
+.scorecard_cell_title {
+ text-align: center;
+ border: 1px solid black;
+ font-weight: 700;
+ height: 32px;
+ padding-top: 4px;
+}

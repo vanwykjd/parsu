@@ -56,6 +56,7 @@ class PasswordChangeFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+
   render() {
     const { password, pwConfirm, error } = this.state;
 

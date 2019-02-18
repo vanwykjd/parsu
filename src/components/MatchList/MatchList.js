@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, List } from 'antd';
+import { List } from 'antd';
 import { withFirebase } from '../Firebase';
 
 import { Link } from 'react-router-dom'
@@ -47,7 +47,7 @@ class MatchList extends Component {
 
                                      
   render() {
-    const { loading, matchList } = this.state;
+    const { matchList } = this.state;
 
     return (
      <section>

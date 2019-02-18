@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-import { Col, InputNumber } from 'antd';
+import { Select } from 'antd';
 
+const Option = Select.Option;
 
 class RoundItem extends Component {
   constructor(props) {
@@ -43,22 +44,21 @@ class RoundItem extends Component {
   
                          
   render() {
-    const hole = this.props.hole_id;
     const score = (this.state.score) ? this.state.score.gross : this.props.score.gross;
-
-    const strokes = this.props.strokes
-     return (
-       
-       <InputNumber
-         size='small'
-         min={0}
-         max={10}
-         value={score}
-         placeHoler={score}
-         onChange={this.onChange}
-         defaultValue={score}
-       />
-      
+    const scores = [1,2,3,4,5,6,7,8,9,10];
+    
+    return (
+      <Select
+        showArrow={false}
+        className='round_input'
+        defaultValue={this.props.hole_par}
+        style={{ width: "100%", textAlign: "center", paddingTop: 24 }}
+        onChange={this.onChange}
+        value={score}
+        placeholder={this.props.hole_par}
+      >
+        {scores.map(score => <Option key={score}>{score}</Option>)}
+      </Select>
     );
   }
 }
