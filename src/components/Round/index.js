@@ -17,63 +17,78 @@ class Round extends Component {
       strokes: null,
       loading: false,
     };
-    this.getRound = this.getRound.bind(this);
+    this.getRoundData = this.getRound.bind(this);
     this.selectTees = this.selectTees.bind(this);
     this.getStrokes = this.getStrokes.bind(this);
   }
   
-  getRound() {
+  // retrieves and sets Round data for current round
+  getRoundData() {
     this.setState({ loading: true });
     
     this.props.firebase.db.ref(`rounds/${this.props.round_id}`).on('value', snapshot => {
       const round = snapshot.val();
       const course = getCourse(round.course_id);
       const strokes = this.getStrokes(course, round.tees);
-      this.setState({ round: round,
-                      course: course,
-                      strokes: strokes,
-                      loading: false
-                    });
+      this.setState({ 
+        round: round,
+        course: course,
+        strokes: strokes,
+        loading: false
       });
+    });
   }
   
+  /*********************************************************************
+    * Updates Round[:tee] data when Round hasn't been initiated 
+    * Needed as param for getStrokes() to calc player's course handicap
+  *********************************************************************/
   selectTees(tees) {
-        this.props.firebase.db.ref(`rounds/${this.props.round_id}`)
-            .update({tees: tees})
+    this.props.firebase.db.ref(`rounds/${this.props.round_id}`)
+      .update({tees: tees})
   }
   
-  
+  /*********************************************************************
+    * Calculates player's course handicap using params[course, tees
+    * Assigns amount of strokes given for each hole based on handicaps
+  *********************************************************************/
   getStrokes(course, tees) {
-        if (tees === 0) {
-          return;
-        }
-        
-        const course_handicap = getCourseHandicap(tees, this.props.user.handicap);
+    if (tees === 0) {
+      return;
+    }
     
-        let strokes = [];
-        Object.keys(course.holes).map(key => 
-          strokes[key] = 0    
-        )
+  // calculates course handicap base on props.user.handicap
+    const course_handicap = getCourseHandicap(tees, this.props.user.handicap);
+    
+    let strokes = [];
+    Object.keys(course.holes).map(key => 
+      strokes[key] = 0    
+    )
       
-        let handicaps= [];
-        Object.keys(course.holes).map(hole => handicaps[hole] = course.holes[hole].handicap[tees.tee_name] );
+    let handicaps= [];
+    Object.keys(course.holes).map(hole => handicaps[hole] = course.holes[hole].handicap[tees.tee_name] );
     
-        
-        let temp_arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        for (let count = 0; count < course_handicap; count++) {
-          temp_arr[count % 18] = temp_arr[count % 18] += 1;
-        }
+  /*********************************************************************
+    * Iterates over tmp_arr [player's course handicap] times and adds += 1
+    * Assigns amount of strokes given for each hole based on handicaps
+  *********************************************************************/     
+    let temp_arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    for (let count = 0; count < course_handicap; count++) {
+      temp_arr[count % 18] = temp_arr[count % 18] += 1;
+    }
     
-        temp_arr.map((stroke, index) =>
-          strokes[index + 1] = stroke         
-        )
+  // Assigns calculated values from temp_arr to strokes Object keys based on index 
+    temp_arr.map((stroke, index) =>
+      strokes[index + 1] = stroke         
+    )
         
-        let round_strokes = {};
-        Object.keys(course.holes).map((hole) =>
-          round_strokes[hole] = strokes[handicaps[hole]]
-        )
-        
-        return round_strokes;
+  // Assigns strokes value to each hole base on hole handicap
+    let round_strokes = {};
+    Object.keys(course.holes).map((hole) =>
+      round_strokes[hole] = strokes[handicaps[hole]]
+    )
+    
+    return round_strokes;
   }
   
   componentDidMount() {
@@ -81,7 +96,7 @@ class Round extends Component {
       return;
     }
     console.log('On Round');
-    this.getRound();
+    this.getRoundData();
   }
   
   componentWillUnmount() {
@@ -89,7 +104,6 @@ class Round extends Component {
     this.props.firebase.db.ref(`rounds/${this.props.round_id}`).off();
   }
 
-                                     
   render() {
     const { round, course, strokes } = this.state;
     let total;
