@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 
-
+/**************************************************************************************
+  * Props: [:player_id, :score, :scores, :hole_id, :match_id, :format, :updateScores]
+  * From: PlayerScores in PlayerScores.js
+**************************************************************************************/
 class ScoreItem extends Component {
   constructor(props) {
     super(props);
     
     this.updatePoints = this.updatePoints.bind(this);
   }
-  
+
+  // Updates Match points using props: [:format, :scores, match_id, :hole_id]
   updatePoints() {
+    
     if (this.props.format === 'stroke') {
+      // no points to be calculated
       return
     }
+    
     if (this.props.format === 'match') {
+      /**************************************************************
+        * Assigns point to player with lowest score
+        * If multiple value of lowest score, no points are assigned
+      **************************************************************/
       const scores = Object.values(this.props.scores);
     
       const playerObjects = Object.entries(this.props.scores).map((entry  => ({

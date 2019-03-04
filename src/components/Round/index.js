@@ -5,7 +5,7 @@ import { withFirebase } from '../Firebase';
 import { getCourse, getCourseHandicap } from '../../courses';
 import SelectTeesForm from './SelectTeesForm';
 import RoundScores from './RoundScores';
-import {Handicap, Par} from '../ScoreCard/holes';
+import { Holes, Distances, Handicap, Par } from '../ScoreCard/holes';
 
 class Round extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Round extends Component {
       strokes: null,
       loading: false,
     };
-    this.getRoundData = this.getRound.bind(this);
+    this.getRoundData = this.getRoundData.bind(this);
     this.selectTees = this.selectTees.bind(this);
     this.getStrokes = this.getStrokes.bind(this);
   }
@@ -68,10 +68,10 @@ class Round extends Component {
     let handicaps= [];
     Object.keys(course.holes).map(hole => handicaps[hole] = course.holes[hole].handicap[tees.tee_name] );
     
-  /*********************************************************************
+  /*************************************************************************
     * Iterates over tmp_arr [player's course handicap] times and adds += 1
     * Assigns amount of strokes given for each hole based on handicaps
-  *********************************************************************/     
+  *************************************************************************/     
     let temp_arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     for (let count = 0; count < course_handicap; count++) {
       temp_arr[count % 18] = temp_arr[count % 18] += 1;
@@ -95,7 +95,7 @@ class Round extends Component {
     if (this.state.round) {
       return;
     }
-    console.log('On Round');
+    console.log('Getting Round Data');
     this.getRoundData();
   }
   
@@ -106,6 +106,8 @@ class Round extends Component {
 
   render() {
     const { round, course, strokes } = this.state;
+    console.log(round);
+    console.log(course);
     let total;
     if (round) {
       const hole_ids = Object.keys(round.scores);
@@ -116,12 +118,6 @@ class Round extends Component {
     
     return (
       <div>
-        {course && 
-         <span>
-         <Handicap holes={course.holes} tees={round.tees} />
-         <Par holes={course.holes} tees={round.tees}/>
-        </span>
-        }
         <br/>
       
         <Row type="flex" justify="space-around" align="middle">
@@ -137,11 +133,15 @@ class Round extends Component {
         { round && (round.tees !== 0) && 
           <section>
             <h1>Gross Score</h1>
-            <Row type="flex" justify="space-around" align="middle">
+            <Holes holes={course.holes} />
+            <Distances holes={course.holes} tees={[round.tees.tee_name]} tee_colors={[course.tee_colors[course.course_tees.indexOf(round.tees.tee_name)]]} total={round.tees.total_distance} />
+            <Handicap holes={course.holes} tees={round.tees} />
+            <Par holes={course.holes} tees={round.tees}/>
+            <Row type="flex" justify="space-around" align="top">
               <Col span={4} className="score_cell_title">
                 {this.props.user.username}
               </Col>
-
+              
               { Object.keys(round.scores).map( (hole_id) =>
                 <Col span={1} key={hole_id}>                          
                   <RoundScores

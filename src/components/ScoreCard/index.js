@@ -6,14 +6,17 @@ import { withFirebase } from '../Firebase';
 
 import PlayerPoints from '../PlayerPoints';
 import PlayerScores from '../PlayerScores';
-import {ScoreHeader} from './holes';
-import Distances from './tees';
+import { Holes, Distances } from './holes';
 
 
+/**********************************************
+  * Props: [:players, :points, :course_holes]
+  * From: ScoreCard
+**********************************************/
 const Points = (props) => (
   <section>
   <h1>Points</h1>
-  <ScoreHeader holes={props.course_holes} />
+  <Holes holes={props.course_holes} />
   { Object.keys(props.players).map( (player) =>
      <Row key={player+'_points'}>
         <PlayerPoints key={player} points={props.points[player]} player={props.players[player]} />
@@ -22,12 +25,15 @@ const Points = (props) => (
    </section>
 ) 
 
-
+/*************************************************************
+  * Props: [:players, : scores, :match_id, :course, :format]
+  * From: ScoreCard
+*************************************************************/
 const Scores = (props) => (
   <section>
     <h1>Net Scores</h1>
-     <ScoreHeader holes={props.course.holes} />
-      <Distances holes={props.course.holes} tees={props.course.course_tees} tee_colors={props.course.tee_colors} />
+     <Holes holes={props.course.holes} />
+     
     { Object.keys(props.players).map( (player) =>
        <Row key={player +'_scores'}>
          <PlayerScores
@@ -44,7 +50,10 @@ const Scores = (props) => (
    </section>
 );
 
-
+/****************************
+  * Props: [:match_id]
+  * From: Match in Match.js
+****************************/
 class ScoreCard extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +67,7 @@ class ScoreCard extends Component {
     this.getMatchData = this.getMatchData.bind(this);
   }
   
+  // retrieves and sets Match and Course data
   getMatchData() {
    this.setState({ loading: true });
       this.props.firebase.db.ref(`matches/${this.props.match_id}`).on('value', snapshot => {
@@ -71,7 +81,7 @@ class ScoreCard extends Component {
     if (this.state.match) {
       return;
     }
-    console.log('On matches');
+    console.log('Getting Match and Course Data');
     this.getMatchData();
   }
   

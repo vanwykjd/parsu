@@ -16,13 +16,18 @@ class RoundItem extends Component {
     this.onChange = this.onChange.bind(this);
   }
   
+  /**************************************************************************************
+    * Updates Match/[:match_id]/scores/[:hole_id] data when score input has been entered
+    * Updates Rounds/[:match_id]/scores/[:hole_id] data when score input has been entered
+    * Enables for scores to be updated by :hole_id in real-time 
+  **************************************************************************************/
   
   updateScores(score) {
     this.props.firebase.db.ref(`matches/${this.props.match_id}/scores/${this.props.hole_id}/`).update({[this.props.player_id]: score.net });
     this.props.firebase.db.ref(`rounds/${this.props.round_id}/scores/${this.props.hole_id}/`).update(score);
   }
   
-  
+  // handles user score input
   onChange(value) {
     const strokes = this.props.strokes;
 
@@ -45,6 +50,8 @@ class RoundItem extends Component {
                          
   render() {
     const score = (this.state.score) ? this.state.score.gross : this.props.score.gross;
+   
+    // initializes select options for score input
     const scores = [1,2,3,4,5,6,7,8,9,10];
     
     return (
@@ -52,7 +59,7 @@ class RoundItem extends Component {
         showArrow={false}
         className='round_input'
         defaultValue={this.props.hole_par}
-        style={{ width: "100%", textAlign: "center", paddingTop: 24 }}
+        style={{ width: "100%", textAlign: "center"}}
         onChange={this.onChange}
         value={score}
         placeholder={this.props.hole_par}

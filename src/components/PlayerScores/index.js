@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import ScoreItem from './ScoreItem'
 
-class PlayerPoints extends Component {
+/***********************************************************************************
+  * Props: [:player_username, :scores, :player, :match_id, :format, :course_holes]
+  * From: Scores in ScoreCard.js
+***********************************************************************************/
+class PlayerScores extends Component {
                            
   render() {
     const hole_ids = Object.keys(this.props.scores);
@@ -41,4 +45,4 @@ class PlayerPoints extends Component {
   }
 }
 
-export default (PlayerPoints);
+export default (PlayerScores);

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 
-
+/*********************************
+  * Props: [:player, :points]
+  * From: Points in ScoreCard.js
+**********************************/
 class PlayerPoints extends Component {
                                      
   render() {
