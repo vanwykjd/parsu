@@ -106,8 +106,6 @@ class Round extends Component {
 
   render() {
     const { round, course, strokes } = this.state;
-    console.log(round);
-    console.log(course);
     let total;
     if (round) {
       const hole_ids = Object.keys(round.scores);
