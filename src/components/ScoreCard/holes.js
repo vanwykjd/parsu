@@ -63,32 +63,22 @@ const Handicap = (props) => (
 
 
 const Distances = (props) => (
-  <span>
-    { props.tees.map( (tee, index) =>
-     <Row key={tee+'_distances'} type="flex" justify="center" align="middle">
-       <Col span={4} className="scorecard_cell_title" style={{ background: `light${props.tee_colors[index]}`}}>
-         {tee}
+
+     <Row key={props.tees.tee_name+'_distances'} type="flex" justify="center" align="middle">
+       <Col span={4} className={`scorecard_cell_title ${props.tees.tee_color}`}>
+         {props.tees.tee_name}
        </Col>
        
        { Object.keys(props.holes).map( (hole) =>
-         <Col span={1} key={`${hole}_${tee}_id`} className="score_cell" style={{ background: `light${props.tee_colors[index]}`}}>
-           {props.holes[hole].distance[tee]}
+         <Col span={1} key={`${hole}_${props.tees.tee_name}_id`} className={`score_cell ${props.tees.tee_color}`}>
+           {props.holes[hole].distance[props.tees.tee_name]}
          </Col>
        )}
 
-       <Col span={2} className="score_cell" style={{ background: `light${props.tee_colors[index]}`}}>
-       { (props.total) ? (
-          <span>{props.total}</span>
-        ) : (
-          <span>-</span>
-        )}
-         
-        
-      </Col>
+       <Col span={2} className={`score_cell ${props.tees.tee_color}`}>
+          {props.tees.total_distance}
+       </Col>
      </Row>
-    )}
-        
- </span>
 )
 
 export default Distances;

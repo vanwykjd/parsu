@@ -6,7 +6,7 @@ import { withFirebase } from '../Firebase';
 
 import PlayerPoints from '../PlayerPoints';
 import PlayerScores from '../PlayerScores';
-import { Holes, Distances } from './holes';
+import { Holes } from './holes';
 
 
 /**********************************************
@@ -67,7 +67,7 @@ class ScoreCard extends Component {
     this.getMatchData = this.getMatchData.bind(this);
   }
   
-  // retrieves and sets Match and Course data
+  // *** Retrieves and sets Match and Course data ***
   getMatchData() {
    this.setState({ loading: true });
       this.props.firebase.db.ref(`matches/${this.props.match_id}`).on('value', snapshot => {

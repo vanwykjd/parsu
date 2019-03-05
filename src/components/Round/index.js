@@ -22,7 +22,7 @@ class Round extends Component {
     this.getStrokes = this.getStrokes.bind(this);
   }
   
-  // retrieves and sets Round data for current round
+  // *** Retrieves and sets Round data for current round ***
   getRoundData() {
     this.setState({ loading: true });
     
@@ -57,7 +57,7 @@ class Round extends Component {
       return;
     }
     
-  // calculates course handicap base on props.user.handicap
+  // *** Calculates course handicap base on props.user.handicap ***
     const course_handicap = getCourseHandicap(tees, this.props.user.handicap);
     
     let strokes = [];
@@ -77,12 +77,12 @@ class Round extends Component {
       temp_arr[count % 18] = temp_arr[count % 18] += 1;
     }
     
-  // Assigns calculated values from temp_arr to strokes Object keys based on index 
+  // *** Assigns calculated values from temp_arr to strokes Object keys based on index ***
     temp_arr.map((stroke, index) =>
       strokes[index + 1] = stroke         
     )
         
-  // Assigns strokes value to each hole base on hole handicap
+  // *** Assigns strokes value to each hole base on hole handicap ***
     let round_strokes = {};
     Object.keys(course.holes).map((hole) =>
       round_strokes[hole] = strokes[handicaps[hole]]
@@ -106,6 +106,7 @@ class Round extends Component {
 
   render() {
     const { round, course, strokes } = this.state;
+    console.log(round);
     let total;
     if (round) {
       const hole_ids = Object.keys(round.scores);
@@ -132,7 +133,7 @@ class Round extends Component {
           <section>
             <h1>Gross Score</h1>
             <Holes holes={course.holes} />
-            <Distances holes={course.holes} tees={[round.tees.tee_name]} tee_colors={[course.tee_colors[course.course_tees.indexOf(round.tees.tee_name)]]} total={round.tees.total_distance} />
+            <Distances holes={course.holes} tees={round.tees} />
             <Handicap holes={course.holes} tees={round.tees} />
             <Par holes={course.holes} tees={round.tees}/>
             <Row type="flex" justify="space-around" align="top">

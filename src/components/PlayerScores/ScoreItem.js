@@ -12,11 +12,11 @@ class ScoreItem extends Component {
     this.updatePoints = this.updatePoints.bind(this);
   }
 
-  // Updates Match points using props: [:format, :scores, match_id, :hole_id]
+  // *** Updates Match points using props: [:format, :scores, match_id, :hole_id] ***
   updatePoints() {
     
     if (this.props.format === 'stroke') {
-      // no points to be calculated
+      // *** no points to be calculated ***
       return
     }
     

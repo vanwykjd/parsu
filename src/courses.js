@@ -8,7 +8,7 @@ const courses = {
     "country": "United States of America",
     "num_of_holes": 18,
     "course_tees": ["Love", "Blue", "White", "Gold", "Green", "Orange"],
-    "tee_colors": ["Gray", "Blue", "White", "Yellow", "Green", "Orange"],
+    "tee_colors": ["Black", "Blue", "White", "Gold", "Green", "Orange"],
     "tee_options": {
         "M": [
           {
@@ -37,7 +37,7 @@ const courses = {
           },
           {
             "tee_name": "Gold",
-            "tee_color": "Yellow",
+            "tee_color": "Gold",
             "slope": 119,
             "rating": 67.8,
             "total_distance": 5638,
@@ -434,7 +434,7 @@ const courses = {
     "country": "United States of America",
     "num_of_holes": 18,
     "course_tees": ["Dye", "Blue", "White", "Gold", "Green"],
-    "tee_colors": ["Gray", "Blue", "White", "Yellow", "Green"],
+    "tee_colors": ["Black", "Blue", "White", "Gold", "Green"],
     "tee_options": {
       "M": [
         {
@@ -463,7 +463,7 @@ const courses = {
         },
         {
           "tee_name": "Gold",
-          "tee_color": "Yellow",
+          "tee_color": "Gold",
           "slope": 116,
           "rating": 68.0,
           "total_distance": 5569,
@@ -489,7 +489,7 @@ const courses = {
         },
         {
           "tee_name": "Gold",
-          "tee_color": "Yellow",
+          "tee_color": "Gold",
           "slope": 133,
           "rating": 74.6,
           "total_distance": 5569,

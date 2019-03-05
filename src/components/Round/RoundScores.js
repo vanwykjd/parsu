@@ -27,7 +27,7 @@ class RoundItem extends Component {
     this.props.firebase.db.ref(`rounds/${this.props.round_id}/scores/${this.props.hole_id}/`).update(score);
   }
   
-  // handles user score input
+  // *** Handles user score input ***
   onChange(value) {
     const strokes = this.props.strokes;
 
@@ -51,7 +51,7 @@ class RoundItem extends Component {
   render() {
     const score = (this.state.score) ? this.state.score.gross : this.props.score.gross;
    
-    // initializes select options for score input
+    // *** Initializes select options for score input ***
     const scores = [1,2,3,4,5,6,7,8,9,10];
     
     return (

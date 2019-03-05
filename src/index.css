@@ -197,3 +197,30 @@ html {
  height: 32px;
  padding-top: 4px;
 }
+
+
+.Black {
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+}
+
+.Blue {
+  background-color: rgba(63, 127, 217, 0.6);
+}
+
+.Gold {
+  background-color: rgba(217, 179, 63, 0.6);
+}
+
+.Green {
+  background-color: rgba(61, 148, 78, 0.6);
+}
+
+.White {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.Orange {
+  background-color: rgba(217, 125, 63, 0.6);
+}
+

@@ -12,19 +12,19 @@ class SelectTeesForm extends Component {
       tees: null,
       loading: false,
     };
-    this.selectRating = this.selectRating.bind(this);
+
     this.selectTees = this.selectTees.bind(this);
     this.setTees = this.setTees.bind(this);
   }
   
-  // enables user to select tee options for current round
+  // *** Enables user to select tee options for current round ***
   selectTees(e) {
     this.setState({
       tees: e.target.value,
     });
   }
   
-  // submits selected tees to be set for current round
+  // *** Submits selected tees to be set for current round ***
   setTees() {
     const { tees } = this.state;
     this.props.selectTees(tees);

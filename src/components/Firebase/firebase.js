@@ -35,7 +35,6 @@ class Firebase {
   // *** User API ***
 
   // *** Merge Auth and DB User API *** //
-
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
@@ -48,7 +47,7 @@ class Firebase {
               uid: key,
             }));
    
-            // merge auth and db user
+            // *** merge auth and db user ***
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
@@ -73,12 +72,6 @@ class Firebase {
   matches = () => this.db.ref('matches');
 
   match = uid => this.db.ref(`matches/${uid}`);
-
-  
-  
-  user = uid => this.db.ref(`users/${uid}`);
-
-  users = () => this.db.ref('users');
 }
 
 export default Firebase;
