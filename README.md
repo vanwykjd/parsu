@@ -1,6 +1,8 @@
 # Parsuit
 A web application that provides a platform for golfers to create matches and keep track of scores in real time.
 
+[![CircleCI](https://circleci.com/gh/vanwykjd/parsuit/tree/master.svg?style=svg)](https://circleci.com/gh/vanwykjd/parsuit/tree/master)
+
 ## Features
 * Create a user account by providing an email, username and handicap
 * Create a golf match by selecting a format, golf course, and players participating
