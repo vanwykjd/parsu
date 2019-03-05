@@ -23,12 +23,13 @@ Parsuit was built with:
 * `git clone https://github.com/vanwykjd/parsuit.git`
 * `cd parsuit`
 * `npm install`
-* `npm start`
-* visit http://localhost:3000
+
+After install, set up your Firebase db and import your Firebase project config information.
+
+Then run `npm start` and go to http://localhost:3000 to see your running version.
 
 
-
-### Firebase Configuration
+## Firebase Configuration
 Here's an overview on how to add Firebase to your personal project [Firebase Setup](https://firebase.google.com/docs/database/web/start)
 
 * After initializing your Firebase real-time database, copy/paste the configuration info from your Firebase project's dashboard into one of these files
@@ -47,7 +48,7 @@ REACT_APP_STORAGE_BUCKET="firebase_project_config_storageBucket"
 REACT_APP_MESSAGING_SENDER_ID="firebase_project_config_messgingSenderId"
 ```
 
-### Firebase Database Structure
+##### Firebase Database Structure
 ```
 dbname-123dd
  |
