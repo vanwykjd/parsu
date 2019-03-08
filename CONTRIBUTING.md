@@ -1,6 +1,6 @@
 # Welcome to Parsuit!
 
-###Thank you for your interest in the project!  
+### Thank you for your interest in the project!  
 
 If you are interested in making contributions or unsure of how to get started, here are some guidelines to help you through the process.
 
@@ -35,7 +35,7 @@ If you have an idea for a new feature, submit it in the project's [Issues](https
 1. Clone your fork locally (Notice that git's `origin` reference will point to your forked repository).
 1. It is useful to have the upstream repository registered as well using: `git remote add upstream https://github.com/vanwykjd/parsuit.git` and periodically fetch it using `git fetch upstream`.
 
-###2. Firebase Setup/Config
+### 2. Firebase Setup/Config
 
 This project is set up to utilize a real-time Firebase database. To be able to view live version of your forked repo, you need to set up a personal Firebase database. Here's an overview on how to add Firebase to your personal project [Firebase Setup](https://firebase.google.com/docs/database/web/start)
 
