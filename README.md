@@ -85,5 +85,5 @@ dbname-123dd
 This project adheres to the [JS Foundation Code of Conduct](https://js.foundation/community/code-of-conduct). Please read the full text so that you can understand what actions will and will not be tolerated.
 
 ## How to Contribute
-If your interested in contributing to this project, follow the guidelines given in the [CONTRIBUTING](https://github.com/vanwykjd/parsuit/CONTRIBUTING) file.
+If your interested in contributing to this project, follow the guidelines given in the [CONTRIBUTING](https://github.com/vanwykjd/parsuit/blob/master/CONTRIBUTING.md) file.
 
