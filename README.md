@@ -81,3 +81,9 @@ dbname-123dd
 - [ ] Enable users to create Tournaments/Events (Multiple related matches)
 - [ ] Enable users create/join groups
 
+## Code of Conduct
+This project adheres to the [JS Foundation Code of Conduct](https://js.foundation/community/code-of-conduct). Please read the full text so that you can understand what actions will and will not be tolerated.
+
+## How to Contribute
+If your interested in contributing to this project, follow the guidelines given in the [CONTRIBUTING](https://github.com/vanwykjd/parsuit/CONTRIBUTING) file.
+
