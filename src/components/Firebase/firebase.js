@@ -42,17 +42,12 @@ class Firebase {
           .once('value')
           .then(snapshot => {
             const dbUser = snapshot.val();
-            const userMatches = Object.keys(dbUser.matches).map(key => ({
-               ...dbUser.matches[key],
-              uid: key,
-            }));
    
             // *** merge auth and db user ***
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
               providerData: authUser.providerData,
-              matchList: userMatches,
               ...dbUser,
             };
 

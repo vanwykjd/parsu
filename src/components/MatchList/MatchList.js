@@ -23,10 +23,13 @@ class MatchList extends Component {
     
     this.props.firebase.db.ref(`users/${this.props.user.uid}/matches`).on('value', snapshot => {
       const matchesObject = snapshot.val();
-      const matchList = Object.keys(matchesObject).map(key => ({
-        ...matchesObject[key],
-        uid: key,
-      }))
+      let matchList = this.state.matchList;
+      if (matchesObject) {
+        matchList = Object.keys(matchesObject).map(key => ({
+          ...matchesObject[key],
+          uid: key,
+        }))
+      }
       
       this.setState({ matchList: matchList, loading: false });
       });
@@ -51,8 +54,8 @@ class MatchList extends Component {
 
     return (
      <section>
-        { matchList && 
-         <List size="large" bordered>
+        { matchList ? (
+           <List size="large" bordered>
             { matchList.map( (match) =>
               <List.Item key={match.uid}>
                 <List.Item.Meta title={match.course_name} description={match.date_created}  />
@@ -66,8 +69,13 @@ class MatchList extends Component {
               </List.Item>
             )}
            </List>
+         ) : (
+          <div style={{ textAlign: 'center'}}>
+            No matches have been set up. Create a new match to get started.
+          </div>
+         )
         }
-      </section>
+     </section>
     );
   }
 }
