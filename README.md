@@ -59,6 +59,8 @@ dbname-123dd
   - users
 ```
 
+For further details on setting up a Firebase Databse with your project, here is a step-by-step [guide](https://github.com/vanwykjd/parsuit/blob/master/.firebase_setup/FIREBASE_SETUP.md)
+
 ## To-Do:
 - [x] Enable user registration
 - [x] Enable user sign-in/sign-out

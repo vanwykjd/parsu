@@ -68,9 +68,7 @@ dbname-123dd
 
 Once you have a your forked repo configured with your personal Firebase project, you may need to run `npm install` to ensure all dependencies are up to date. 
 
-For further details on setting up a Firebase Databse with your project, here is a step-by-step [guide](https://github.com/vanwykjd/parsuit/.firebase_setup/FIREBASE_SETUP.md) with a "Feature" label, along with a brief description, and any idea's on how it would be implemented.
-
-
+For further details on setting up a Firebase Databse with your project, here is a step-by-step [guide](https://github.com/vanwykjd/parsuit/blob/master/.firebase_setup/FIREBASE_SETUP.md)
 ### 3. Create a feature branch
 
 Create and switch to a new feature branch: `git checkout -b {branch_name} upstream/master`  
