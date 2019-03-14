@@ -32,7 +32,7 @@ Once you are brought to the list of 'Sign-in providers' select 'Email/Password'.
 ### 6. Enable Email/Password:
 
 Click the toggle to 'Enable' the Email/Password method and click 'Save'.
-<img src="/.firebase_setup/fb_db_1.png" alt="Enable email" />
+<img src="/.firebase_setup/fb_db_6.png" alt="Enable email" />
 
 ### 7. Choose Realtime Database:
 
